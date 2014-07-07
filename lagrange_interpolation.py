@@ -13,21 +13,6 @@ import itertools
 import tempfile
 import pdb
 
-
-###############################################################################
-# OPTION PARSING
-###############################################################################
-parser = ArgumentParser("Produces plots of Lagrange interpolation of cos(x) for various numbers of Chebyshev and equally spaced points")
-args = parser.parse_args()
-
-
-###############################################################################
-# END OPTION PARSING 
-###############################################################################
-
-start = 0
-end = (5*math.pi)/2
-
 def get_lagrange_poly(interp_points,fn_to_eval):
     def lagrange_poly(eval_point):
         val = 0
@@ -97,8 +82,11 @@ def plot_stats(mae_list,rmsd_list,maxe_list,n_points_range,ax):
         rect_idx += 1
     return texts
 
-# Plot the statistica errors as a bar graph 
+parser = ArgumentParser("Produces plots of Lagrange interpolation of cos(x) for various numbers of Chebyshev and equally spaced points")
+args = parser.parse_args()
 
+start = 0
+end = (5*math.pi)/2
 n_eval_pts = 1000
 eval_step_size = float(end-start)/n_eval_pts
 n_points_range = range(2,6,1)
