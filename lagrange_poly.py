@@ -28,6 +28,7 @@ def get_lagrange_poly(interp_points,fn_to_eval):
 # Plot the curves of the benchmark and the interpolating polynomials 
 # Returns MAE and RMSD of each poly
 def plot_lagrange_polys(x,n_points_range,lagrange_polys,y_exact,ax):
+    lines = []
     mae_list = []
     rmsd_list = []
     maxe_list = []
@@ -35,7 +36,8 @@ def plot_lagrange_polys(x,n_points_range,lagrange_polys,y_exact,ax):
     for poly_idx in range(0,len(lagrange_polys)):
         # Plot
         y = [ lagrange_polys[poly_idx](pt) for pt in x ]
-        ax.plot(x,y,label=str(n_points_range[poly_idx])+" Points")
+        line, = ax.plot(x,y,label=str(n_points_range[poly_idx])+" Points")
+        lines.append(line)
 
         # Compute stats
         abs_errors = [abs(y[i] - y_exact[i]) for i in range(0,len(y))]
@@ -47,9 +49,11 @@ def plot_lagrange_polys(x,n_points_range,lagrange_polys,y_exact,ax):
         maxe_list.append(max(abs_errors))
 
     # Plot exact result
-    ax.plot(x,y_exact,label="cos(x)")
+    line, = ax.plot(x,y_exact,label="cos(x)")
+    lines.append(line)
 
-    return mae_list,rmsd_list,maxe_list
+
+    return lines,mae_list,rmsd_list,maxe_list
 
 
 # Sets up a bar graph comparing the MAE and RMSD for different numbers

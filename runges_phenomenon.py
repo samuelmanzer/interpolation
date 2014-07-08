@@ -32,7 +32,7 @@ n_points_range = range(6,13,3)
 # Runge's points
 interp_point_sets = [[ float(2*i)/(n-1) - 1 for i in range(0,n) ] for n in n_points_range]
 polys = [get_lagrange_poly(interp_points,runge_function) for interp_points in interp_point_sets]
-mae_list,rmsd_list,maxe_list = plot_lagrange_polys(x,n_points_range,polys,y_exact,ax1)
+lines,mae_list,rmsd_list,maxe_list = plot_lagrange_polys(x,n_points_range,polys,y_exact,ax1)
 texts_1 = plot_stats(mae_list,rmsd_list,maxe_list,n_points_range,ax2)
 
 plt.show()
